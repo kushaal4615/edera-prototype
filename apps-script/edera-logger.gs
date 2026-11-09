@@ -29,7 +29,7 @@
  * casual junk, not security. Anyone with the /exec URL can post rows.
  */
 
-const SHEET_ID = 'PASTE_THE_SHEET_ID_HERE'; // sheet "deropo logs": the long id in its URL
+const SHEET_ID = '1-6I3oUuLSKyEjC1Q5z3A4BONLJrVbSqw5XFJyZw_hlM'; // sheet "deropo logs"
 const SECRET = 'edera-tr-D4v3-9Kp2-2026';
 
 /** Which tab each app writes to. The tracker sends "app" (and the tab name) in every batch. */

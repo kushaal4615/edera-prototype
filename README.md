@@ -47,7 +47,18 @@ npm run dev          # http://localhost:5282
 npm run build        # tsc --noEmit && vite build → dist/
 ```
 
-Deploy with `vercel --prod` (zero config). Visitor journey logging goes to a Google Sheet once the Apps Script in `apps-script/edera-logger.gs` is deployed and its `/exec` URL pasted into `ENDPOINT` in `src/lib/tracker.js`.
+Deploy with `vercel --prod` (zero config).
+
+## Visitor journey logging
+
+Every visit becomes rows in the Google Sheet "deropo logs" (ID `1-6I3oUuLSKyEjC1Q5z3A4BONLJrVbSqw5XFJyZw_hlM`), tab `prototype logs`, one row per event: `page_view`, `view` (every screen change, including open sheets, modals and drawers, named like `app:vendor:iyabola+send-a-booking-request`), `action` (every tap on a button, tab, switch or link, renamed to its intent such as `send_request` where the control calls `track()`), and `session_end` with the total duration. Filter by `session_id` and sort by `seq` to replay one visitor.
+
+- `apps-script/edera-logger.gs`: receives batches, appends with one `setValues()`, auto-creates the tab and header, rejects batches without the secret, `doGet()` health check, `testWrite()` for the editor.
+- `src/lib/tracker.js`: batches events (2.5 s idle or 12 events), `fetch` with `no-cors` + `text/plain`, `sendBeacon` on `pagehide`. While `ENDPOINT` is the placeholder, on localhost, or under an automated browser, events are logged to the console and never sent.
+
+Setup, in order: open the sheet → Extensions → Apps Script → paste the `.gs` → run `testWrite` once and approve permissions → Deploy → New deployment → Web app, execute as Me, access Anyone → open the `/exec` URL and check `sheet_reachable: true` → paste the `/exec` URL into `ENDPOINT` in `src/lib/tracker.js` → build and deploy. After any later edit to the script: Deploy → Manage deployments → edit → Version: New version.
+
+The secret is visible in the client bundle: a speed bump, not security. Anyone with the `/exec` URL can post rows. Acceptable for a throwaway client demo only. Logging a client's clicks is something you may want to disclose to them.
 
 ## Audits
 
