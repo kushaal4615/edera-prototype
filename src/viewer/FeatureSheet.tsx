@@ -1,4 +1,4 @@
-import { AnimatePresence, motion, useAnimationControls, type PanInfo } from 'framer-motion'
+import { AnimatePresence, motion, useAnimationControls, useDragControls, type PanInfo } from 'framer-motion'
 import { X } from 'lucide-react'
 import { useEffect, type ReactNode } from 'react'
 import { F } from '../data/featureIndex'
@@ -12,6 +12,8 @@ import { spring } from '../motion/springs'
 
 export function PhoneSheet({ open, onClose, title, children, tall = false, label }: { open: boolean; onClose: () => void; title: string; children: ReactNode; tall?: boolean; label: string }) {
   const controls = useAnimationControls()
+  /* drag only from the handle and the title row: a tap on a list row must stay a tap (iOS swallowed row taps as tiny drags) */
+  const drag = useDragControls()
   const vh = typeof window !== 'undefined' ? window.innerHeight : 800
   const low = vh * (1 - (tall ? 0.92 : 0.55))
   const high = vh * 0.08
@@ -37,25 +39,27 @@ export function PhoneSheet({ open, onClose, title, children, tall = false, label
             aria-modal="true"
             aria-label={label}
             className="glass absolute inset-x-0 top-0 flex flex-col rounded-t-[26px]"
-            style={{ height: vh - high, touchAction: 'none' }}
+            style={{ height: vh - high }}
             initial={{ y: vh }}
             animate={controls}
             exit={{ y: vh, transition: { duration: 0.2, ease: [0.32, 0.72, 0, 1] } }}
             drag="y"
+            dragListener={false}
+            dragControls={drag}
             dragConstraints={{ top: high, bottom: vh }}
             dragElastic={{ top: 0.05, bottom: 0.6 }}
             onDragEnd={onDragEnd}
           >
-            <div className="flex shrink-0 justify-center pb-1 pt-2.5">
+            <div className="flex shrink-0 cursor-grab justify-center pb-1 pt-2.5" onPointerDown={(e) => drag.start(e)} style={{ touchAction: 'none' }}>
               <span className="h-[5px] w-10 rounded-full bg-[var(--paper-400)]" />
             </div>
-            <div className="flex shrink-0 items-center justify-between px-5 pb-2">
+            <div className="flex shrink-0 items-center justify-between px-5 pb-2" onPointerDown={(e) => drag.start(e)} style={{ touchAction: 'none' }}>
               <h2 className="grot text-[22px]">{title}</h2>
               <button type="button" onClick={onClose} aria-label="Close" className="grid h-11 w-11 place-items-center rounded-full hover:bg-[var(--surface-high)]">
                 <X size={20} />
               </button>
             </div>
-            <div className="scroll-y min-h-0 flex-1 px-5" style={{ overscrollBehavior: 'contain', touchAction: 'pan-y' }}>
+            <div className="scroll-y min-h-0 flex-1 px-5" style={{ overscrollBehavior: 'contain', touchAction: 'pan-y' }} onPointerDownCapture={(e) => e.stopPropagation()}>
               {children}
               <PresenterLine />
               <div style={{ height: `calc(${tall ? 0 : vh * 0.37}px + max(env(safe-area-inset-bottom), 12px))` }} />
