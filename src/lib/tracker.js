@@ -3,7 +3,7 @@
    One file, no dependencies, no cookies, no local storage.
 
    Sends batches of events to the Google Apps Script web app in
-   ~/Deropo/edera-prototype/apps-script/edera-logger.gs, which appends them to the sheet "deropo logs".
+   ~/Deropo/edera-prototype/apps-script/edera-logger.gs, which appends them to the sheet "logs".
 
    Event types
      page_view    the visitor landed

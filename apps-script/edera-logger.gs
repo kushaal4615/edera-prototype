@@ -5,7 +5,7 @@
  * "proposal logs"). Filter a tab by session_id and sort by seq to replay one visitor's journey.
  *
  * SETUP, in this order
- *   1. Open the sheet "deropo logs" (SHEET_ID below), then Extensions → Apps Script. (A standalone script at
+ *   1. Open the sheet "logs" (SHEET_ID below), then Extensions → Apps Script. (A standalone script at
  *      script.google.com works too: openById does not need the script to be bound to the sheet.)
  *      Delete the sample code, paste this whole file, Save.
  *   2. In the editor, pick testWrite in the function dropdown and press Run. Approve the
@@ -29,7 +29,7 @@
  * casual junk, not security. Anyone with the /exec URL can post rows.
  */
 
-const SHEET_ID = '1-6I3oUuLSKyEjC1Q5z3A4BONLJrVbSqw5XFJyZw_hlM'; // sheet "deropo logs"
+const SHEET_ID = '1-6I3oUuLSKyEjC1Q5z3A4BONLJrVbSqw5XFJyZw_hlM'; // sheet "logs"
 const SECRET = 'edera-tr-D4v3-9Kp2-2026';
 
 /** Which tab each app writes to. The tracker sends "app" (and the tab name) in every batch. */
