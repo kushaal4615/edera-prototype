@@ -92,7 +92,7 @@ export default function VendorReviews() {
               <button
                 key={stars}
                 type="button"
-                onClick={() => setFilter(stars === 5 ? '5' : stars === 4 ? '4' : 'all')}
+                onClick={() => { if (stars >= 4) setFilter(stars === 5 ? '5' : '4'); else { setFilter('all'); toast(`${n} ${stars}-star review${n === 1 ? '' : 's'} · shown in All`, 'info') } }}
                 aria-label={`${stars} star reviews: ${n}`}
                 className="flex h-6 items-center gap-2"
               >
