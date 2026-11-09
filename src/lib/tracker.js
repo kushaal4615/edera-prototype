@@ -23,7 +23,7 @@
    ──────────────────────────────────────────────────────────────── */
 
 // Paste the /exec URL from Deploy → Manage deployments here. Nothing else needs editing.
-export const ENDPOINT = 'PASTE_THE_APPS_SCRIPT_EXEC_URL_HERE'
+export const ENDPOINT = 'https://script.google.com/macros/s/AKfycbyzHKYriwEZjUx48WtL6Y6XRj_Qi3ghT0OLI1MLtOdG_PWAPD5rOVuJceIAP4WSRrCD/exec'
 
 // Must match SECRET in apps-script/edera-logger.gs. Visible in the client bundle: a speed bump, not security.
 export const SECRET = 'edera-tr-D4v3-9Kp2-2026'
