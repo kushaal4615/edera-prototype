@@ -336,6 +336,12 @@ export default function ProGuests() {
         {others.map((r) => (
           <motion.div key={r.id} variants={listItem}><GuestRow r={r} q={q} onOpen={setOpen} /></motion.div>
         ))}
+        {matches.length + others.length === 0 && (
+          <div className="mx-5 mt-2 rounded-[var(--r-card)] bg-[var(--surface-raised)] px-4 py-5 text-center">
+            <p className="grot text-[20px]">No one here yet</p>
+            <p className="mt-1 text-[13px] text-text-2">{table ? `Nobody is seated at ${table}${q ? ` matching “${q}”` : ''}. Pick another table or clear the filter.` : `No guest matches “${q}”.`}</p>
+          </div>
+        )}
         {tonight && !table && <p className="meta px-5 pt-2 text-text-2">+ {expected - TONIGHT_GUESTS.length} more on the list · scroll in the door view</p>}
         {ruby && !table && <p className="meta px-5 pt-2 text-text-2">+ {expected - RUBY_GUESTS.length - guestsAdded.length} more invited · grouped by family, church, colleagues, friends</p>}
       </motion.div>
