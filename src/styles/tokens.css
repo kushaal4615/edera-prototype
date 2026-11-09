@@ -1,0 +1,230 @@
+/* EDERA tokens. Direction: EVERGREEN & BRASS, a custom row derived from
+   the client's own brand at useedera.com (theme colour #123C35 and the
+   brass arc in its mark). Deep evergreen ink, a brighter evergreen for
+   fills, brass for the celebratory moments, a warm paper base.
+   Fraunces (display serif) + Manrope (text) + DM Mono (meta). Radius
+   hierarchy 24 / 16 / 10 / 999, springy-overshoot motion.
+   Three layers: primitive → semantic → component. Every surface token
+   ships with its paired foreground (on-*) token. Single LIGHT theme.
+   Availability states (free / held / booked) are first-class tokens
+   because the product's signature device is built on them. */
+
+:root {
+  /* ── Primitives ─────────────────────────────────────────── */
+  --paper-50: #f7f2e8;   /* base: warm paper */
+  --paper-0: #fffdf9;    /* surface */
+  --paper-100: #fbf7ef;  /* raised */
+  --paper-200: #efe7d8;  /* high / sunk */
+  --paper-300: #e1d6c2;
+  --paper-400: #c9bca4;
+  --paper-500: #9d9179;
+
+  --ever-50: #eef6f2;
+  --ever-100: #d9ede6;   /* accent soft */
+  --ever-200: #b4dccf;
+  --ever-300: #7cc2ad;
+  --ever-400: #4ca58c;   /* highlight on dark */
+  --ever-500: #2e9c85;
+  --ever-600: #23836f;
+  --ever-700: #1c6b5a;   /* accent fill: white text 6.2:1 */
+  --ever-800: #175449;
+  --ever-900: #123c35;   /* ink: the brand green */
+  --ever-950: #0b2622;   /* night */
+
+  --brass-50: #fbf4e3;
+  --brass-100: #f3e6c9;
+  --brass-200: #e9d39f;
+  --brass-300: #e6c27c;  /* brass on evergreen ink: 9.4:1 */
+  --brass-500: #c9973f;  /* brass fill: night text 7.6:1 */
+  --brass-600: #a97a28;
+  --brass-700: #8a5e14;  /* brass as text on paper: 5.3:1 */
+  --brass-800: #5e3f0a;
+
+  --ruby-500: #b2384a;   /* danger / decline; also the anniversary's colour */
+  --ruby-600: #9a2f40;
+  --ruby-100: #f6dadf;
+  --ruby-800: #6a1f2b;
+
+  --ink-text-2: #4f655f; /* 5.5:1 on paper */
+  --ink-text-3: #5f736d; /* 4.6:1 on paper */
+
+  --plum-500: #5b2a86;   /* info */
+  --plum-100: #e8dcf3;
+  --plum-800: #3c1a5a;
+
+  /* ── Semantic ───────────────────────────────────────────── */
+  --bg: var(--paper-50);
+  --bg-sunk: var(--paper-200);
+  --surface: var(--paper-0);
+  --surface-raised: var(--paper-100);
+  --surface-high: var(--paper-200);
+  --surface-tint: color-mix(in oklch, var(--ever-700) 7%, var(--paper-50));
+
+  --text: var(--ever-900);
+  --text-2: var(--ink-text-2);
+  --text-3: var(--ink-text-3);
+  --rule: rgb(18 60 53 / 0.1);
+  --rule-strong: rgb(18 60 53 / 0.2);
+
+  /* paired surfaces */
+  --ink: var(--ever-900);
+  --on-ink: #f7f2e8;
+  --on-ink-2: #b9cbc4;   /* 7.9:1 on ink */
+
+  --night: var(--ever-950);
+  --on-night: #f7f2e8;
+  --on-night-2: #a9bdb6;
+
+  --accent: var(--ever-700);
+  --on-accent: #ffffff;
+  --on-accent-2: #d2e8df; /* 5.0:1 on accent */
+  --accent-text: var(--ever-800);
+  --accent-soft: var(--ever-100);
+  --on-accent-soft: var(--ever-800);
+
+  --brass: var(--brass-500);
+  --on-brass: var(--ever-950);
+  --brass-text: var(--brass-700);
+  --brass-soft: var(--brass-100);
+  --on-brass-soft: var(--brass-800);
+  --brass-light: var(--brass-300); /* brass used as text/line on ink and night */
+
+  /* availability: the signature strip */
+  --free: var(--ever-500);
+  --free-soft: var(--ever-100);
+  --on-free-soft: var(--ever-800);
+  --held: var(--brass-500);
+  --held-soft: var(--brass-100);
+  --on-held-soft: var(--brass-800);
+  --booked: var(--ever-900);
+  --booked-soft: #d9d4cb;
+  --on-booked-soft: var(--ever-900);
+  --blocked: var(--paper-300);
+
+  --warn: var(--brass-700);
+  --on-warn: #fff8e8;
+  --warn-soft: var(--brass-100);
+  --on-warn-soft: var(--brass-800);
+
+  --danger: var(--ruby-500);
+  --on-danger: #ffffff;
+  --danger-text: var(--ruby-600);
+  --danger-soft: var(--ruby-100);
+  --on-danger-soft: var(--ruby-800);
+
+  --info: var(--plum-500);
+  --info-soft: var(--plum-100);
+  --on-info-soft: var(--plum-800);
+
+  --success: var(--ever-600);
+  --success-soft: var(--ever-100);
+  --on-success-soft: var(--ever-800);
+
+  /* ── Radius hierarchy: container > card > control > chip ── */
+  --r-container: 24px;
+  --r-card: 16px;
+  --r-control: 10px;
+  --r-chip: 999px;
+
+  /* ── Elevation: base / raised / floating ── */
+  --shadow-raised: 0 1px 2px rgb(18 60 53 / 0.05), 0 8px 24px -10px rgb(18 60 53 / 0.16);
+  --shadow-floating: 0 2px 4px rgb(18 60 53 / 0.06), 0 18px 44px -14px rgb(18 60 53 / 0.3);
+  --shadow-well: inset 0 1px 2px rgb(18 60 53 / 0.08), inset 0 0 0 1px rgb(18 60 53 / 0.06);
+  --glow-accent: 0 12px 32px -12px rgb(28 107 90 / 0.65);
+  --glow-brass: 0 12px 32px -12px rgb(201 151 63 / 0.7);
+  --glow-ink: 0 12px 32px -12px rgb(18 60 53 / 0.55);
+
+  /* ── Type ───────────────────────────────────────────────── */
+  --font-display: 'Fraunces', 'Georgia', serif;
+  --font-text: 'Manrope', -apple-system, system-ui, sans-serif;
+  --font-mono: 'DM Mono', ui-monospace, monospace;
+
+  /* scale: 11 / 13 / 15 / 17 / 22 / 34 / 56 / 80 */
+  --t-11: 11px;
+  --t-13: 13px;
+  --t-15: 15px;
+  --t-17: 17px;
+  --t-22: 22px;
+  --t-34: 34px;
+  --t-56: 56px;
+  --t-80: 80px;
+
+  /* ── Motion ─────────────────────────────────────────────── */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+
+  /* ── Viewer chrome ──────────────────────────────────────── */
+  --stage: #e6dfd2;
+  --glass: rgb(255 253 249 / 0.8);
+  --glass-edge: rgb(255 255 255 / 0.95);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-sunk: var(--bg-sunk);
+  --color-surface: var(--surface);
+  --color-raised: var(--surface-raised);
+  --color-high: var(--surface-high);
+  --color-tint: var(--surface-tint);
+  --color-text: var(--text);
+  --color-text-2: var(--text-2);
+  --color-text-3: var(--text-3);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+  --color-ink: var(--ink);
+  --color-on-ink: var(--on-ink);
+  --color-on-ink-2: var(--on-ink-2);
+  --color-night: var(--night);
+  --color-on-night: var(--on-night);
+  --color-on-night-2: var(--on-night-2);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-text);
+  --color-on-accent: var(--on-accent);
+  --color-on-accent-2: var(--on-accent-2);
+  --color-accent-soft: var(--accent-soft);
+  --color-on-accent-soft: var(--on-accent-soft);
+  --color-brass: var(--brass);
+  --color-on-brass: var(--on-brass);
+  --color-brass-ink: var(--brass-text);
+  --color-brass-soft: var(--brass-soft);
+  --color-on-brass-soft: var(--on-brass-soft);
+  --color-brass-light: var(--brass-light);
+  --color-free: var(--free);
+  --color-free-soft: var(--free-soft);
+  --color-on-free-soft: var(--on-free-soft);
+  --color-held: var(--held);
+  --color-held-soft: var(--held-soft);
+  --color-on-held-soft: var(--on-held-soft);
+  --color-booked: var(--booked);
+  --color-booked-soft: var(--booked-soft);
+  --color-on-booked-soft: var(--on-booked-soft);
+  --color-blocked: var(--blocked);
+  --color-warn: var(--warn);
+  --color-on-warn: var(--on-warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-on-warn-soft: var(--on-warn-soft);
+  --color-danger: var(--danger);
+  --color-on-danger: var(--on-danger);
+  --color-danger-text: var(--danger-text);
+  --color-danger-soft: var(--danger-soft);
+  --color-on-danger-soft: var(--on-danger-soft);
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+  --color-on-info-soft: var(--on-info-soft);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-on-success-soft: var(--on-success-soft);
+  --color-stage: var(--stage);
+
+  --font-display: var(--font-display);
+  --font-text: var(--font-text);
+  --font-mono: var(--font-mono);
+
+  --radius-container: var(--r-container);
+  --radius-card: var(--r-card);
+  --radius-control: var(--r-control);
+  --radius-chip: var(--r-chip);
+
+  --shadow-raised: var(--shadow-raised);
+  --shadow-floating: var(--shadow-floating);
+}
